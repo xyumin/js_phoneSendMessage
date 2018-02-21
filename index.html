@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>模拟手机短信发送</title>
+	<style type="text/css">
+		body,div,input,p,img,ul,li {
+			margin:0;
+			padding:0;
+		}
+		body {
+			font-family: "微软雅黑";
+		}
+		img {
+			border:none;
+		}
+		input {
+			outline: none;
+			border:none;
+		}
+		ul {
+			list-style: none;
+		}
+		.clearfix:after {
+			content:"";
+			display:block;
+			clear: both;
+		}
+		.clearfix {
+			*zoom:1;
+		}
+		.wrap {
+			width:289px;
+			height:594px;
+			margin:0 auto;
+			background: url("img/bg.png");
+			overflow: hidden;
+			zoom:1;
+
+		}
+		.content {
+			width:237px;
+			height:419px;
+			margin:87px 26px 88px;
+		}
+		.output_panel {
+			height:359px;
+			width:237px;
+			padding-top: 11px;
+			overflow-y:auto;
+			overflow-x:hidden; 
+		}
+		.output_panel span {
+			
+			font-size: 12px;
+			line-height: 23px;
+			padding:4px;
+		}
+		.input_panel {
+			height:34px;
+			margin-bottom: 6px;
+			margin-top: 9px;
+			position: relative;
+		}
+		#icon {
+			display: block;
+			position: absolute;
+			left: 4px;
+			top:0px;
+			width:24px;
+			height:24px;
+			padding:5px 4px;
+		}
+		#message {
+			display: block;
+			position: absolute;
+			left:47px;
+			top:0;
+			width:130px;
+			height:34px;
+			line-height: 34px;
+			background-color: #fff;
+			font-size: 14px;
+			color:#000;
+		}
+		#btn {
+			display: block;
+			position: absolute;
+			left:181px;
+			top:0;
+			width:56px;
+			height:34px;
+			background-color: #fff;
+			opacity:0;
+			filter:alpha(opacity=0);
+			cursor: pointer;
+		}
+		.left, .right {
+			margin-bottom: 6px;
+		}
+		.right {
+			margin-right: 3px;
+			margin-left: 11px;
+		}
+		.right img {
+			float: right;
+			width:24px;
+		}
+		.right span {
+			background-color: #21c618;
+			color:#fff;
+			float:right;
+			margin-right: 7px;
+			max-width: 167px;
+			word-break: break-all;
+		}
+		.left {
+			margin-left: 14px;
+			margin-right: 14px;
+		}
+		.left img {
+			float: left;
+			width:24px;
+		}
+		.left span {
+			background-color: #ded6e7;
+			color:#000;
+			float: left;
+			margin-left: 6px;
+			max-width: 154px;
+			word-break: break-all;
+		}
+		p {
+			text-align: center;
+			font-size: 16px;
+			color:#245;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload=function(){
+			var output_panel=getById('output_panel');
+			var oIcon=getById('icon');
+			var oMessage=getById('message');
+			var oBtn=getById('btn');
+			var str="";
+			var flag=true;
+			oIcon.onclick=function(){
+				if(flag){
+					oIcon.src="img/icon1.png";
+					flag=false;
+				}else{
+					oIcon.src="img/icon2.png";
+					flag=true;
+				}
+			}
+			oBtn.onclick=function(){
+				if (oMessage.value!='') {
+					if(!flag){
+					str='<li class="left clearfix"><img src="'+oIcon.src+'" ><span>说：'+oMessage.value+'</span></li>'
+				}else{
+					str='<li class="right clearfix"><img src="'+oIcon.src+'" ><span>说：'+oMessage.value+'</span></li>'
+					}
+				}
+				
+
+			output_panel.innerHTML=str+output_panel.innerHTML;
+			oMessage.value='';
+			}
+			
+			function getById(id){
+				return document.getElementById(id);
+			}
+		}
+
+	</script>
+</head>
+<body>
+	<div class="wrap">
+		<div class="content">
+			<ul class="output_panel" id="output_panel">
+			</ul>
+			<div class="input_panel">
+				<img src="img/icon2.png" alt="" id="icon"><input type="text" value="" id="message" /><input type="button" id="btn" />
+			</div>
+		</div>
+	</div>
+	<p>点击表情可切换头像，输入框输入文字，点击发送按钮，显示在屏幕上，超出屏幕高度出现滚动条</p>
+</body>
+</html>
